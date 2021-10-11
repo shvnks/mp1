@@ -27,5 +27,3 @@ plt.ylabel("Number of documents")
 plt.tight_layout()
 
 plt.savefig("BBC-distribution.pdf", bbox_inches="tight")
-
-
