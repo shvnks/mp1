@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 import os
 
 # 510 files
@@ -27,5 +27,3 @@ plt.ylabel("Number of documents")
 plt.tight_layout()
 
 plt.savefig("BBC-distribution.pdf", bbox_inches="tight")
-
-
