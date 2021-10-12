@@ -25,7 +25,6 @@ import matplotlib.pyplot as plt
 cont_path = '/home/shanks/Documents/6th-Semester/COMP-472/mp1/BBC' #simply putting /BBC or /mp1/BBC wasn't working so I used absolute path
 files = load_files(cont_path, description='- D. Greene and P. Cunningham. \"Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering\", Proc. ICML 2006.', load_content=True, shuffle=True, encoding='latin1')
 
-# print(files)
 
 # 4. Pre-process the dataset to have the features ready to be used by a multinomial Naive Bayes classifier. This means that the frequency of each word in each class must be computed and stored in a term-document matrix. For this, you can use feature extraction.text.CountVectorizer.
 # X_train = files.data
@@ -34,8 +33,6 @@ files = load_files(cont_path, description='- D. Greene and P. Cunningham. \"Prac
 # X_test = file.data
 # y_test = files.target
 
-# from pprint import pprint
-# pprint(list(newsgroups_train.target_names))
 
 # Feature scaling
 count_vect = CountVectorizer(input=files, encoding='utf-8', decode_error='strict', strip_accents=None, lowercase=True, token_pattern='(?u)\\b\\w\\w+\\b', ngram_range=(1, 1))
@@ -48,7 +45,7 @@ print(count_vect)
 # X_train_count = count_vect.fit_transform(twenty_train.data)
 # X_train_count.shape
 # 5. Split the dataset into 80% for training and 20% for testing. For this, you must use train_test_split with the parameter random state set to None.
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, train_size=0.8, random_state=None, shuffle=True, stratify=None)
+X_train, X_test, y_train, y_test = train_test_split(count_vect, test_size=0.2, train_size=0.8, random_state=None, shuffle=True, stratify=None)
 print(X_train)
 print(X_test)
 print(y_train)
