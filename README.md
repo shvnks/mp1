@@ -5,4 +5,5 @@ Purpose:
 
 # Installation
 ```console
-pip3 install requirements.txt```
+pip3 install requirements.txt
+```
