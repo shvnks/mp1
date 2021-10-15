@@ -26,4 +26,4 @@ plt.title("Documents per section")
 plt.ylabel("Number of documents")
 plt.tight_layout()
 
-plt.savefig("output/task1/BBC-distribution.pdf", bbox_inches="tight")
+plt.savefig("output/task1/bbc-distribution.pdf", bbox_inches="tight")

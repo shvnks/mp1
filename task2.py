@@ -2,6 +2,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from sklearn import datasets
 from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import accuracy_score, classification_report
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import Perceptron
@@ -48,16 +49,21 @@ df.Drug = df.Drug.cat.codes
 # TASK 2 PART 5: Split the dataset using train_test_split using the default parameter values.
 # print(train_test_split(df))
 # X_train, X_test = train_test_split(df)
+
+X = df[["Age", "Sex", "BP", "Cholesterol", "Na_to_K"]]
+y = df["Drug"]
 X_train, X_test, y_train, y_test = train_test_split(X, y)
-#
-print(X_train)
-print(X_test)
-print(y_train)
-print(y_test)
+
+# print(X_train)
+# print(X_test)
+# print(y_train)
+# print(y_test)
 # TASK 2 PART 6a: NB: a Gaussian Naive Bayes Classier (naive bayes.GaussianNB) with the default parameters.
 gauss = GaussianNB()
-gauss.fit(X_train)
-print(gauss)
+gauss.fit(X_train, y_train)
+y_predict = gauss.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, y_predict))
+print("\nClassification Report: \n", classification_report(y_test, y_predict))
 
 # TASK 2 PART 6b:
 
@@ -69,6 +75,6 @@ print(gauss)
 
 # TASK 2 PART 6f:
 
-# TASK 2 PART 7: For each of the 6 classier above, append the following information in ale called drugs-performance.txt:(to make it easier for the TAs, make sure that your output for each sub-question below is clearly marked in your output le, using the headings (a), (b) . . . )
+# TASK 2 PART 7: For each of the 6 classfier above, append the following information in ale called drugs-performance.txt:(to make it easier for the TAs, make sure that your output for each sub-question below is clearly marked in your output le, using the headings (a), (b) . . . )
 
 # TASK 2 PART 7a: a clear separator (a sequence of hyphens or stars) and a string clearly describing the model (e.g. the model name + hyper-parameter values that you changed). In the case of Top-DT and Top-MLP, display the best hyperparameters found by the gridsearch.
