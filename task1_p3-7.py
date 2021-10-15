@@ -22,16 +22,16 @@ import matplotlib.pyplot as plt
 #files = load_files('/mp1/BBC', description='- D. Greene and P. Cunningham. \"Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering\", Proc. ICML 2006.', load_content=True, shuffle=True, encoding='latin1')
 # Windows: mnt/d/Nextcloud/Concordia/6th-Semester/COMP-472/mp1/BBC
 # Linux: '/home/shanks/Documents/6th-Semester/COMP-472/mp1/BBC'
-cont_path = '/home/shanks/Documents/6th-Semester/COMP-472/mp1/BBC' #simply putting /BBC or /mp1/BBC wasn't working so I used absolute path
+cont_path = 'mp1/BBC' #simply putting /BBC or /mp1/BBC wasn't working so I used absolute path
 files = load_files(cont_path, description='- D. Greene and P. Cunningham. \"Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering\", Proc. ICML 2006.', load_content=True, shuffle=True, encoding='latin1')
 
 
 # 4. Pre-process the dataset to have the features ready to be used by a multinomial Naive Bayes classifier. This means that the frequency of each word in each class must be computed and stored in a term-document matrix. For this, you can use feature extraction.text.CountVectorizer.
-# X_train = files.data
-# y_train = files.target
+X_train = files.data
+y_train = files.target
 
-# X_test = file.data
-# y_test = files.target
+X_test = files.data
+y_test = files.target
 
 
 # Feature scaling
@@ -39,8 +39,11 @@ count_vect = CountVectorizer(input=files, encoding='utf-8', decode_error='strict
 print('\n\n\n\n\n\n\n\n\n\n\n\n\n\nvect')
 print(count_vect)
 
-# X_train = count_vect.fit_transform(X_train)
-#X_test = count_vect.transform(X_test)
+# X = count_vect.fit_transform(X_train)
+# X_test = count_vect.transform(X_test)
+#
+# y = count_vect.fit_transform(y_train)
+# y_test = count_vect.transform(y_test)
 
 # X_train_count = count_vect.fit_transform(twenty_train.data)
 # X_train_count.shape
