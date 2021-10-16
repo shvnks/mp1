@@ -39,9 +39,9 @@ X = df[["Age", "Sex", "BP", "Cholesterol", "Na_to_K"]] # features
 y = df["Drug"]                                         # target variable
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
-for i in range(10):
-    with open('/output/task2/drug-performance.txt', 'r', encoding='utf-8', errors='ignore') as f:
-        f.write('Trial #', i, ':')
+with open('output/task2/drug-performance.txt', 'w+', encoding='utf-8', errors='ignore') as f:
+    for i in range(2):
+        f.write('Trial #' +  str(i + 1) + ':\n')
         # TASK 2 PART 6a: NB: a Gaussian Naive Bayes Classier (naive bayes.GaussianNB) with the default parameters.
         # Console indicator for dataset
         print('####################################\n########     GaussianNB     ########\n####################################')
@@ -56,10 +56,10 @@ for i in range(10):
         # Print output
         print("\nc & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
 
-        f.write('####################################\n########     GaussianNB     ########\n####################################')
-        f.write("b) Confusion Matrix: ")
-        f.write(confusion_matrix(y_test, y_predict))
-        f.write("\nc & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
+        f.write('####################################\n########     GaussianNB     ########\n####################################\n')
+        f.write("b) Confusion Matrix: \n")
+        f.write(str(confusion_matrix(y_test, y_predict)))
+        f.write("\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
 
         # TASK 2 PART 6b: Base-DT: a Decision Tree (tree.DecisionTreeClassifier) with the default parameters.
         # Console indicator for dataset
@@ -76,10 +76,10 @@ for i in range(10):
         # Print output
         print("c & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
 
-        f.write('\n####################################\n#####  DecisionTreeClassifier  #####\n####################################')
-        f.write("b) Confusion Matrix: ")
-        f.write(confusion_matrix(y_test, y_predict))
-        f.write("\nc & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
+        f.write('\n####################################\n#####  DecisionTreeClassifier  #####\n####################################\n')
+        f.write("b) Confusion Matrix: \n")
+        f.write(str(confusion_matrix(y_test, y_predict)))
+        f.write("\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
 
         # TASK 2 PART 6c: Top-DT: a better performing Decision Tree found using (GridSearchCV). The gridsearch will allow you tond the best combination of hyper-parameters, as determined by the evaluation function that you have determined in step (3) above. The hyper-parameters that you will experiment with are:
         # • criterion: gini or entropy
@@ -114,10 +114,10 @@ for i in range(10):
         # Print output
         print("c & d) Classification Report: \n", metrics.classification_report(y_test, y_predict, zero_division=0))
 
-        f.write('\n####################################\n########     Perceptron     ########\n####################################')
-        f.write("b) Confusion Matrix: ")
-        f.write(confusion_matrix(y_test, y_predict))
-        f.write("\nc & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
+        f.write('\n####################################\n########     Perceptron     ########\n####################################\n')
+        f.write("b) Confusion Matrix: \n")
+        f.write(str(confusion_matrix(y_test, y_predict)))
+        f.write("\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
 
         # TASK 2 PART 6e: Base-MLP: a Multi-Layered Perceptron (neural network.MLPClassifier) with 1 hidden layer of 100 neurons, sigmoid/logistic as activation function, stochastic gradient descent, and default values for the rest of the parameters.
         # Console indicator for dataset
@@ -135,10 +135,10 @@ for i in range(10):
         # Print output
         print("c & d) Classification Report: \n", metrics.classification_report(y_test, y_predict, zero_division=0))
 
-        f.write('\n####################################\n##### Multi-Layered Perceptron #####\n####################################')
-        f.write("b) Confusion Matrix: ")
-        f.write(confusion_matrix(y_test, y_predict))
-        f.write("\nc & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
+        f.write('\n####################################\n##### Multi-Layered Perceptron #####\n####################################\n')
+        f.write("b) Confusion Matrix: \n")
+        f.write(str(confusion_matrix(y_test, y_predict)))
+        f.write("\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
 
         # TASK 2 PART 6f: Top-MLP: a better performing Multi-Layered Perceptron found using grid search. For this, you need to experiment with the following parameter values:
         # • activation function: sigmoid, tanh, relu and identity
@@ -155,7 +155,4 @@ for i in range(10):
         print('Grid best parameters: ', grid.best_estimator_)
         print('Grid best score: ', grid.best_score_)
 
-        # TASK 2 PART 7: For each of the 6 classfier above, append the following information in ale called drugs-performance.txt:(to make it easier for the TAs, make sure that your output for each sub-question below is clearly marked in your output le, using the headings (a), (b) . . . )
-
-
-        # TASK 2 PART 7a: a clear separator (a sequence of hyphens or stars) and a string clearly describing the model (e.g. the model name + hyper-parameter values that you changed). In the case of Top-DT and Top-MLP, display the best hyperparameters found by the gridsearch.
+        f.write('==================================================\n\n')
