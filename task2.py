@@ -59,7 +59,7 @@ with open('output/task2/drug-performance.txt', 'w+', encoding='utf-8', errors='i
         f.write('####################################\n########     GaussianNB     ########\n####################################\n')
         f.write("b) Confusion Matrix: \n")
         f.write(str(confusion_matrix(y_test, y_predict)))
-        f.write("\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
+        f.write("\n\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
 
         # TASK 2 PART 6b: Base-DT: a Decision Tree (tree.DecisionTreeClassifier) with the default parameters.
         # Console indicator for dataset
@@ -79,7 +79,7 @@ with open('output/task2/drug-performance.txt', 'w+', encoding='utf-8', errors='i
         f.write('\n####################################\n#####  DecisionTreeClassifier  #####\n####################################\n')
         f.write("b) Confusion Matrix: \n")
         f.write(str(confusion_matrix(y_test, y_predict)))
-        f.write("\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
+        f.write("\n\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
 
         # TASK 2 PART 6c: Top-DT: a better performing Decision Tree found using (GridSearchCV). The gridsearch will allow you tond the best combination of hyper-parameters, as determined by the evaluation function that you have determined in step (3) above. The hyper-parameters that you will experiment with are:
         # • criterion: gini or entropy
@@ -117,7 +117,7 @@ with open('output/task2/drug-performance.txt', 'w+', encoding='utf-8', errors='i
         f.write('\n####################################\n########     Perceptron     ########\n####################################\n')
         f.write("b) Confusion Matrix: \n")
         f.write(str(confusion_matrix(y_test, y_predict)))
-        f.write("\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
+        f.write("\n\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
 
         # TASK 2 PART 6e: Base-MLP: a Multi-Layered Perceptron (neural network.MLPClassifier) with 1 hidden layer of 100 neurons, sigmoid/logistic as activation function, stochastic gradient descent, and default values for the rest of the parameters.
         # Console indicator for dataset
@@ -138,7 +138,7 @@ with open('output/task2/drug-performance.txt', 'w+', encoding='utf-8', errors='i
         f.write('\n####################################\n##### Multi-Layered Perceptron #####\n####################################\n')
         f.write("b) Confusion Matrix: \n")
         f.write(str(confusion_matrix(y_test, y_predict)))
-        f.write("\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
+        f.write("\n\nc & d) Classification Report: \n" + str(metrics.classification_report(y_test, y_predict)))
 
         # TASK 2 PART 6f: Top-MLP: a better performing Multi-Layered Perceptron found using grid search. For this, you need to experiment with the following parameter values:
         # • activation function: sigmoid, tanh, relu and identity
