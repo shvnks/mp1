@@ -105,11 +105,8 @@ print("c & d) Classification Report: \n", metrics.classification_report(y_test, 
 # TASK 2 PART 6e: Base-MLP: a Multi-Layered Perceptron (neural network.MLPClassifier) with 1 hidden layer of 100 neurons, sigmoid/logistic as activation function, stochastic gradient descent, and default values for the rest of the parameters.
 # Console indicator for dataset
 print('\n####################################\n##### Multi-Layered Perceptron #####\n####################################')
-<<<<<<< HEAD
+
 mlp = MLPClassifier(hidden_layer_sizes=(100), max_iter=5000, activation='logistic', solver='sgd')          # Create MLPClassifier object
-=======
-mlp = MLPClassifier(hidden_layer_sizes=(100), max_iter=4000, activation='logistic', solver='sgd')          # Create MLPClassifier object
->>>>>>> 416ca97ec1d80cf9e5195d3986df00eef5b7e5ed
 mlp = mlp.fit(X_train, y_train)     # Train MLPClassifier
 y_predict = mlp.predict(X_test)         # Predict response from the test dataset
 
