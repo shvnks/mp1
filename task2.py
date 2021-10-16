@@ -7,6 +7,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import Perceptron
 from sklearn.neural_network import MLPClassifier
+from sklearn.pipeline import Pipeline
 # from sklearn.datasets import make_classification
 
 # TASK 2 PART 2: Load the Drug.csv in Python by using panda.read_csv.
@@ -79,44 +80,65 @@ print("Classification Report: \n", metrics.classification_report(y_test, y_predi
 
 # TASK 2 PART 6c: Top-DT: a better performing Decision Tree found using (GridSearchCV). The gridsearch will allow you tond the best combination of hyper-parameters, as determined by the evaluation function that you have determined in step (3) above. The hyper-parameters that you will experiment with are:
 # • criterion: gini or entropy
-# • max depth : 2 different values of your choice
-# • min samples split: 3 different values of your choice
+# • max_depth : 2 different values of your choice
+# • min_samples_split: 3 different values of your choice
+# Console indicator for dataset
+print('\n####################################\n#######  DT w/ GridSearchCV  #######\n####################################')
+# dtGrid = DecisionTreeClassifier()          # Create DecisionTreeClassifier object
+# dtGrid = dtGrid.fit(X_train, y_train)     # Train DecisionTreeClassifier
+# y_predict = dtGrid.predict(X_test)         # Predict response from the test dataset
+
+parameters = {'criterion':['gini', 'entropy'], 'max_depth':[1,3], 'min_samples_split':[5,10,15]}
+
+grid = GridSearchCV(dtClass, param_grid=parameters, cv=10, n_jobs=-1)
+
+grid.fit(X_train, y_train)
+print('Grid best parameter: ', grid.best_estimator_)
+print('Grid best score: ', grid.best_score_)
 
 # TASK 2 PART 6d: PER: a Perceptron (linear model.Perceptron), with default parameter values.
 # Console indicator for dataset
 print('\n####################################\n########     Perceptron     ########\n####################################')
-per = Perceptron()          # Create DecisionTreeClassifier object
-per = per.fit(X_train, y_train)     # Train DecisionTreeClassifier
+per = Perceptron()          # Create Perceptron object
+per = per.fit(X_train, y_train)     # Train Perceptron
 y_predict = per.predict(X_test)         # Predict response from the test dataset
 
 # Print output
 print("Accuracy:", metrics.accuracy_score(y_test, y_predict))
-print("Classification Report: \n", metrics.classification_report(y_test, y_predict))
+print("Classification Report: \n", metrics.classification_report(y_test, y_predict, zero_division=0))
 
 # TASK 2 PART 6e: Base-MLP: a Multi-Layered Perceptron (neural network.MLPClassifier) with 1 hidden layer of 100 neurons, sigmoid/logistic as activation function, stochastic gradient descent, and default values for the rest of the parameters.
 # Console indicator for dataset
 print('\n####################################\n##### Multi-Layered Perceptron #####\n####################################')
-mlp = MLPClassifier(hidden_layer_sizes=(100), activation='logistic', solver='sgd')          # Create DecisionTreeClassifier object
-mlp = mlp.fit(X_train, y_train)     # Train DecisionTreeClassifier
+mlp = MLPClassifier(hidden_layer_sizes=(100), max_iter=3000, activation='logistic', solver='sgd')          # Create MLPClassifier object
+mlp = mlp.fit(X_train, y_train)     # Train MLPClassifier
 y_predict = mlp.predict(X_test)         # Predict response from the test dataset
 
 # Print output
 print("Accuracy:", metrics.accuracy_score(y_test, y_predict))
-print("Classification Report: \n", metrics.classification_report(y_test, y_predict))
+print("Classification Report: \n", metrics.classification_report(y_test, y_predict, zero_division=0))
 
 # TASK 2 PART 6f: Top-MLP: a better performing Multi-Layered Perceptron found using grid search. For this, you need to experiment with the following parameter values:
 # • activation function: sigmoid, tanh, relu and identity
 # • 2 network architectures of your choice: for eg 2 hidden layers with 30+50 nodes, 3 hidden layers with 10 + 10 + 10
 # • solver: Adam and stochastic gradient descent
 # Console indicator for dataset
-# print('\n####################################\n#######   MLP w/ GridSearch  #######\n####################################')
-# mlpGrid = MLPClassifier(hidden_layer_sizes=(), activation{'logistic', 'tanh', 'relu', 'identity'})          # Create DecisionTreeClassifier object
-# mlpGrid = mlpGrid.fit(X_train, y_train)     # Train DecisionTreeClassifier
+print('\n####################################\n######   MLP w/ GridSearchCV  ######\n####################################')
+
+parameters = {'hidden_layer_sizes':[(30,50), (10,10,10)], 'activation':['logistic', 'tanh', 'relu', 'identity'], 'solver':['sgd', 'adam']}
+
+grid = GridSearchCV(mlp, param_grid=parameters, cv=10, n_jobs=-1)
+
+grid.fit(X_train, y_train)
+print('Grid best parameter: ', grid.best_estimator_)
+print('Grid best score: ', grid.best_score_)
+# mlpGrid = MLPClassifier(hidden_layer_sizes=(30, 50), max_iter=3000, activation={'logistic', 'tanh', 'relu', 'identity'})          # Create MLPClassifier object
+# mlpGrid = mlpGrid.fit(X_train, y_train)     # Train MLPClassifier
 # y_predict = mlpGrid.predict(X_test)         # Predict response from the test dataset
 #
 # # Print output
 # print("Accuracy:", metrics.accuracy_score(y_test, y_predict))
-# print("Classification Report: \n", metrics.classification_report(y_test, y_predict))
+# print("Classification Report: \n", metrics.classification_report(y_test, y_predict, zero_division=0))
 
 # TASK 2 PART 7: For each of the 6 classfier above, append the following information in ale called drugs-performance.txt:(to make it easier for the TAs, make sure that your output for each sub-question below is clearly marked in your output le, using the headings (a), (b) . . . )
 
