@@ -99,9 +99,13 @@ with open('output/task2/drug-performance.txt', 'w+', encoding='utf-8', errors='i
         print('Grid best parameters: ', grid.best_estimator_)
         print('Grid best score: ', grid.best_score_)
 
+        f.write('\n####################################\n#######  DT w/ GridSearchCV  #######\n####################################\n')
+        f.write('Grid best parameters: ' + str(grid.best_estimator_))
+        f.write('\nGrid best score: ' + str(grid.best_score_))
+
         # TASK 2 PART 6d: PER: a Perceptron (linear model.Perceptron), with default parameter values.
         # Console indicator for dataset
-        print('\n####################################\n########     Perceptron     ########\n####################################')
+        print('\n\n####################################\n########     Perceptron     ########\n####################################')
         per = Perceptron()          # Create Perceptron object
         per = per.fit(X_train, y_train)     # Train Perceptron
         y_predict = per.predict(X_test)         # Predict response from the test dataset
@@ -155,4 +159,7 @@ with open('output/task2/drug-performance.txt', 'w+', encoding='utf-8', errors='i
         print('Grid best parameters: ', grid.best_estimator_)
         print('Grid best score: ', grid.best_score_)
 
-        f.write('==================================================\n\n')
+        f.write('\n####################################\n######   MLP w/ GridSearchCV  ######\n####################################\n')
+        f.write('Grid best parameters: ' + str(grid.best_estimator_))
+        f.write('\nGrid best score: ' + str(grid.best_score_))
+        f.write('\n==================================================\n\n')
