@@ -93,7 +93,7 @@ parameters = {'criterion':['gini', 'entropy'], 'max_depth':[1,3], 'min_samples_s
 grid = GridSearchCV(dtClass, param_grid=parameters, cv=10, n_jobs=-1)
 
 grid.fit(X_train, y_train)
-print('Grid best parameter: ', grid.best_estimator_)
+print('Grid best parameters: ', grid.best_estimator_)
 print('Grid best score: ', grid.best_score_)
 
 # TASK 2 PART 6d: PER: a Perceptron (linear model.Perceptron), with default parameter values.
@@ -110,7 +110,7 @@ print("Classification Report: \n", metrics.classification_report(y_test, y_predi
 # TASK 2 PART 6e: Base-MLP: a Multi-Layered Perceptron (neural network.MLPClassifier) with 1 hidden layer of 100 neurons, sigmoid/logistic as activation function, stochastic gradient descent, and default values for the rest of the parameters.
 # Console indicator for dataset
 print('\n####################################\n##### Multi-Layered Perceptron #####\n####################################')
-mlp = MLPClassifier(hidden_layer_sizes=(100), max_iter=3000, activation='logistic', solver='sgd')          # Create MLPClassifier object
+mlp = MLPClassifier(hidden_layer_sizes=(100), max_iter=4000, activation='logistic', solver='sgd')          # Create MLPClassifier object
 mlp = mlp.fit(X_train, y_train)     # Train MLPClassifier
 y_predict = mlp.predict(X_test)         # Predict response from the test dataset
 
@@ -130,7 +130,7 @@ parameters = {'hidden_layer_sizes':[(30,50), (10,10,10)], 'activation':['logisti
 grid = GridSearchCV(mlp, param_grid=parameters, cv=10, n_jobs=-1)
 
 grid.fit(X_train, y_train)
-print('Grid best parameter: ', grid.best_estimator_)
+print('Grid best parameters: ', grid.best_estimator_)
 print('Grid best score: ', grid.best_score_)
 # mlpGrid = MLPClassifier(hidden_layer_sizes=(30, 50), max_iter=3000, activation={'logistic', 'tanh', 'relu', 'identity'})          # Create MLPClassifier object
 # mlpGrid = mlpGrid.fit(X_train, y_train)     # Train MLPClassifier
