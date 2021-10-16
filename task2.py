@@ -40,8 +40,8 @@ y = df["Drug"]                                         # target variable
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
 for i in range(10):
-    with open('/output/task2/drug-performance.txt', 'r', encoding='utf-8', errors='ignore') as f:
-        f.write('Trial #', i, ':')
+    with open('output/task2/drug-performance.txt', 'w+', encoding='utf-8', errors='ignore') as f:
+        f.write('Trial #' +  str(i) + ':\n')
         # TASK 2 PART 6a: NB: a Gaussian Naive Bayes Classier (naive bayes.GaussianNB) with the default parameters.
         # Console indicator for dataset
         print('####################################\n########     GaussianNB     ########\n####################################')
