@@ -39,102 +39,123 @@ X = df[["Age", "Sex", "BP", "Cholesterol", "Na_to_K"]] # features
 y = df["Drug"]                                         # target variable
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
-# TASK 2 PART 6a: NB: a Gaussian Naive Bayes Classier (naive bayes.GaussianNB) with the default parameters.
-# Console indicator for dataset
-print('####################################\n########     GaussianNB     ########\n####################################')
-gauss = GaussianNB()                        # Create GaussianNB object
-gauss.fit(X_train, y_train)                 # Train GaussianNB
-y_predict = gauss.predict(X_test)           # Predict response from the test dataset
+for i in range(10):
+    with open('/output/task2/drug-performance.txt', 'r', encoding='utf-8', errors='ignore') as f:
+        f.write('Trial #', i, ':')
+        # TASK 2 PART 6a: NB: a Gaussian Naive Bayes Classier (naive bayes.GaussianNB) with the default parameters.
+        # Console indicator for dataset
+        print('####################################\n########     GaussianNB     ########\n####################################')
+        gauss = GaussianNB()                        # Create GaussianNB object
+        gauss.fit(X_train, y_train)                 # Train GaussianNB
+        y_predict = gauss.predict(X_test)           # Predict response from the test dataset
 
-# Making the confusion matrix
-print("b) Confusion Matrix: ")
-print(confusion_matrix(y_test, y_predict))
-print()
+        # Making the confusion matrix
+        print("b) Confusion Matrix: ")
+        print(confusion_matrix(y_test, y_predict))
 
-# Print output
-print("c & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
+        # Print output
+        print("\nc & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
 
-# TASK 2 PART 6b: Base-DT: a Decision Tree (tree.DecisionTreeClassifier) with the default parameters.
-# Console indicator for dataset
-print('\n####################################\n#####  DecisionTreeClassifier  #####\n####################################')
-dtClass = DecisionTreeClassifier()          # Create DecisionTreeClassifier object
-dtClass = dtClass.fit(X_train, y_train)     # Train DecisionTreeClassifier
-y_predict = dtClass.predict(X_test)         # Predict response from the test dataset
+        f.write('####################################\n########     GaussianNB     ########\n####################################')
+        f.write("b) Confusion Matrix: ")
+        f.write(confusion_matrix(y_test, y_predict))
+        f.write("\nc & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
 
-# Making the confusion matrix
-print("b) Confusion Matrix: ")
-print(confusion_matrix(y_test, y_predict))
-print()
+        # TASK 2 PART 6b: Base-DT: a Decision Tree (tree.DecisionTreeClassifier) with the default parameters.
+        # Console indicator for dataset
+        print('\n####################################\n#####  DecisionTreeClassifier  #####\n####################################')
+        dtClass = DecisionTreeClassifier()          # Create DecisionTreeClassifier object
+        dtClass = dtClass.fit(X_train, y_train)     # Train DecisionTreeClassifier
+        y_predict = dtClass.predict(X_test)         # Predict response from the test dataset
 
-# Print output
-print("c & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
+        # Making the confusion matrix
+        print("b) Confusion Matrix: ")
+        print(confusion_matrix(y_test, y_predict))
+        print()
 
-# TASK 2 PART 6c: Top-DT: a better performing Decision Tree found using (GridSearchCV). The gridsearch will allow you tond the best combination of hyper-parameters, as determined by the evaluation function that you have determined in step (3) above. The hyper-parameters that you will experiment with are:
-# • criterion: gini or entropy
-# • max_depth : 2 different values of your choice
-# • min_samples_split: 3 different values of your choice
-# Console indicator for dataset
-print('\n####################################\n#######  DT w/ GridSearchCV  #######\n####################################')
-# dtGrid = DecisionTreeClassifier()          # Create DecisionTreeClassifier object
-# dtGrid = dtGrid.fit(X_train, y_train)     # Train DecisionTreeClassifier
-# y_predict = dtGrid.predict(X_test)         # Predict response from the test dataset
+        # Print output
+        print("c & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
 
-parameters = {'criterion':['gini', 'entropy'], 'max_depth':[1,3], 'min_samples_split':[5,10,15]}
+        f.write('\n####################################\n#####  DecisionTreeClassifier  #####\n####################################')
+        f.write("b) Confusion Matrix: ")
+        f.write(confusion_matrix(y_test, y_predict))
+        f.write("\nc & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
 
-grid = GridSearchCV(dtClass, param_grid=parameters, cv=10, n_jobs=-1)
+        # TASK 2 PART 6c: Top-DT: a better performing Decision Tree found using (GridSearchCV). The gridsearch will allow you tond the best combination of hyper-parameters, as determined by the evaluation function that you have determined in step (3) above. The hyper-parameters that you will experiment with are:
+        # • criterion: gini or entropy
+        # • max_depth : 2 different values of your choice
+        # • min_samples_split: 3 different values of your choice
+        # Console indicator for dataset
+        print('\n####################################\n#######  DT w/ GridSearchCV  #######\n####################################')
+        # dtGrid = DecisionTreeClassifier()          # Create DecisionTreeClassifier object
+        # dtGrid = dtGrid.fit(X_train, y_train)     # Train DecisionTreeClassifier
+        # y_predict = dtGrid.predict(X_test)         # Predict response from the test dataset
 
-grid.fit(X_train, y_train)
-print('Grid best parameters: ', grid.best_estimator_)
-print('Grid best score: ', grid.best_score_)
+        parameters = {'criterion':['gini', 'entropy'], 'max_depth':[1,3], 'min_samples_split':[5,10,15]}
 
-# TASK 2 PART 6d: PER: a Perceptron (linear model.Perceptron), with default parameter values.
-# Console indicator for dataset
-print('\n####################################\n########     Perceptron     ########\n####################################')
-per = Perceptron()          # Create Perceptron object
-per = per.fit(X_train, y_train)     # Train Perceptron
-y_predict = per.predict(X_test)         # Predict response from the test dataset
+        grid = GridSearchCV(dtClass, param_grid=parameters, cv=10, n_jobs=-1)
 
-# Making the confusion matrix
-print("b) Confusion Matrix: ")
-print(confusion_matrix(y_test, y_predict))
-print()
+        grid.fit(X_train, y_train)
+        print('Grid best parameters: ', grid.best_estimator_)
+        print('Grid best score: ', grid.best_score_)
 
-# Print output
-print("c & d) Classification Report: \n", metrics.classification_report(y_test, y_predict, zero_division=0))
+        # TASK 2 PART 6d: PER: a Perceptron (linear model.Perceptron), with default parameter values.
+        # Console indicator for dataset
+        print('\n####################################\n########     Perceptron     ########\n####################################')
+        per = Perceptron()          # Create Perceptron object
+        per = per.fit(X_train, y_train)     # Train Perceptron
+        y_predict = per.predict(X_test)         # Predict response from the test dataset
 
-# TASK 2 PART 6e: Base-MLP: a Multi-Layered Perceptron (neural network.MLPClassifier) with 1 hidden layer of 100 neurons, sigmoid/logistic as activation function, stochastic gradient descent, and default values for the rest of the parameters.
-# Console indicator for dataset
-print('\n####################################\n##### Multi-Layered Perceptron #####\n####################################')
+        # Making the confusion matrix
+        print("b) Confusion Matrix: ")
+        print(confusion_matrix(y_test, y_predict))
+        print()
 
-mlp = MLPClassifier(hidden_layer_sizes=(100), max_iter=5000, activation='logistic', solver='sgd')          # Create MLPClassifier object
-mlp = mlp.fit(X_train, y_train)     # Train MLPClassifier
-y_predict = mlp.predict(X_test)         # Predict response from the test dataset
+        # Print output
+        print("c & d) Classification Report: \n", metrics.classification_report(y_test, y_predict, zero_division=0))
 
-# Making the confusion matrix
-print("b) Confusion Matrix: ")
-print(confusion_matrix(y_test, y_predict))
-print()
+        f.write('\n####################################\n########     Perceptron     ########\n####################################')
+        f.write("b) Confusion Matrix: ")
+        f.write(confusion_matrix(y_test, y_predict))
+        f.write("\nc & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
 
-# Print output
-print("c & d) Classification Report: \n", metrics.classification_report(y_test, y_predict, zero_division=0))
+        # TASK 2 PART 6e: Base-MLP: a Multi-Layered Perceptron (neural network.MLPClassifier) with 1 hidden layer of 100 neurons, sigmoid/logistic as activation function, stochastic gradient descent, and default values for the rest of the parameters.
+        # Console indicator for dataset
+        print('\n####################################\n##### Multi-Layered Perceptron #####\n####################################')
+
+        mlp = MLPClassifier(hidden_layer_sizes=(100), max_iter=5000, activation='logistic', solver='sgd')          # Create MLPClassifier object
+        mlp = mlp.fit(X_train, y_train)     # Train MLPClassifier
+        y_predict = mlp.predict(X_test)         # Predict response from the test dataset
+
+        # Making the confusion matrix
+        print("b) Confusion Matrix: ")
+        print(confusion_matrix(y_test, y_predict))
+        print()
+
+        # Print output
+        print("c & d) Classification Report: \n", metrics.classification_report(y_test, y_predict, zero_division=0))
+
+        f.write('\n####################################\n##### Multi-Layered Perceptron #####\n####################################')
+        f.write("b) Confusion Matrix: ")
+        f.write(confusion_matrix(y_test, y_predict))
+        f.write("\nc & d) Classification Report: \n", metrics.classification_report(y_test, y_predict))
+
+        # TASK 2 PART 6f: Top-MLP: a better performing Multi-Layered Perceptron found using grid search. For this, you need to experiment with the following parameter values:
+        # • activation function: sigmoid, tanh, relu and identity
+        # • 2 network architectures of your choice: for eg 2 hidden layers with 30+50 nodes, 3 hidden layers with 10 + 10 + 10
+        # • solver: Adam and stochastic gradient descent
+        # Console indicator for dataset
+        print('\n####################################\n######   MLP w/ GridSearchCV  ######\n####################################')
+
+        parameters = {'hidden_layer_sizes':[(30,50), (10,10,10)], 'activation':['logistic', 'tanh', 'relu', 'identity'], 'solver':['sgd', 'adam']}
+
+        grid = GridSearchCV(mlp, param_grid=parameters, cv=10, n_jobs=-1)
+
+        grid.fit(X_train, y_train)
+        print('Grid best parameters: ', grid.best_estimator_)
+        print('Grid best score: ', grid.best_score_)
+
+        # TASK 2 PART 7: For each of the 6 classfier above, append the following information in ale called drugs-performance.txt:(to make it easier for the TAs, make sure that your output for each sub-question below is clearly marked in your output le, using the headings (a), (b) . . . )
 
 
-# TASK 2 PART 6f: Top-MLP: a better performing Multi-Layered Perceptron found using grid search. For this, you need to experiment with the following parameter values:
-# • activation function: sigmoid, tanh, relu and identity
-# • 2 network architectures of your choice: for eg 2 hidden layers with 30+50 nodes, 3 hidden layers with 10 + 10 + 10
-# • solver: Adam and stochastic gradient descent
-# Console indicator for dataset
-print('\n####################################\n######   MLP w/ GridSearchCV  ######\n####################################')
-
-parameters = {'hidden_layer_sizes':[(30,50), (10,10,10)], 'activation':['logistic', 'tanh', 'relu', 'identity'], 'solver':['sgd', 'adam']}
-
-grid = GridSearchCV(mlp, param_grid=parameters, cv=10, n_jobs=-1)
-
-grid.fit(X_train, y_train)
-print('Grid best parameters: ', grid.best_estimator_)
-print('Grid best score: ', grid.best_score_)
-
-# TASK 2 PART 7: For each of the 6 classfier above, append the following information in ale called drugs-performance.txt:(to make it easier for the TAs, make sure that your output for each sub-question below is clearly marked in your output le, using the headings (a), (b) . . . )
-
-
-# TASK 2 PART 7a: a clear separator (a sequence of hyphens or stars) and a string clearly describing the model (e.g. the model name + hyper-parameter values that you changed). In the case of Top-DT and Top-MLP, display the best hyperparameters found by the gridsearch.
+        # TASK 2 PART 7a: a clear separator (a sequence of hyphens or stars) and a string clearly describing the model (e.g. the model name + hyper-parameter values that you changed). In the case of Top-DT and Top-MLP, display the best hyperparameters found by the gridsearch.
