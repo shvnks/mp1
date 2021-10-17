@@ -25,15 +25,27 @@ print("training set:", len(X_train), "  test set:", len(X_test))
 vectorizer = TfidfVectorizer(stop_words="english", decode_error="ignore", max_features=2500)  # max_features can be changed
 vectorizer.fit(X_train)
 
-tfidf_matrix = vectorizer.fit_transform(X_train)
+tfidf_matrix = vectorizer.transform(X_train)
 feature_names = vectorizer.get_feature_names_out()
 
 print(tfidf_matrix.shape)
+
 
 # Step 6
 multiBayes1 = MultinomialNB()
 multiBayes1.fit(vectorizer.transform(X_train), y_train)
 y_predict = multiBayes1.predict(vectorizer.transform(X_test))
+
+# for i)
+zeroFreq = [0, 0, 0, 0, 0]
+oneFreq = 0
+for category in range(0, len(files.target_names)):
+    feature = multiBayes1.feature_count_[category]
+    for count in feature:
+        if count == 0:
+            zeroFreq[category] += 1
+        if count == 1:
+            oneFreq += 1
 
 # Step 7
 print("\n********** MultinomialNB default values, try 1 **********")
@@ -46,6 +58,6 @@ print("e) Prior probabilities:", multiBayes1.class_log_prior_)  # not sure
 print("f) Vocabulary Size:", len(vectorizer.vocabulary_))
 print("g) Number of word-tokens in each class:", multiBayes1.class_count_)
 print("h) Number of word-tokens in entire corpus:", tfidf_matrix.sum())
-print("i) Number and percentage of words with zero  freq in each class")
-print("j) Number and percentage of word with one freq in entire corpus")
-print("k) ")  # temp number
+print("i) Number and percentage of words with zero frequency in each class:", zeroFreq)
+print("j) Number and percentage of word with one frequency in entire corpus:", oneFreq)
+print("k) ", multiBayes1.predict_log_proba())  # temp number
