@@ -1,3 +1,8 @@
+# Authors: Anthony Wong, Derek Lam, Tyler Shanks
+# Due: October 18, 2021
+# COMP-472
+
+# Importing necessary libraries
 import pandas as pd
 from matplotlib import pyplot as plt
 from sklearn import metrics

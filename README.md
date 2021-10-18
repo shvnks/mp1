@@ -10,3 +10,17 @@ Purpose:
 ```console
 pip3 install -r requirements.txt
 ```
+
+# Running the program
+- cd into the src directory
+- open a terminal emulator of your choice
+- choose which task you would like to run
+- if task1:
+```console
+python3 task1.py
+```
+- if task2
+```console
+python3 task2.py
+```
+- program provides output to the screen as well as data given within the output folder for each task respectively
