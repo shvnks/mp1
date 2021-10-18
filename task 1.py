@@ -22,7 +22,7 @@ print(dict(zip(labels_str, counts)))    # creating dictionary
 X_train, X_test, y_train, y_test = train_test_split(files.data, files.target, train_size=0.8, test_size=0.2)
 print("training set:", len(X_train), "  test set:", len(X_test))
 
-vectorizer = TfidfVectorizer(stop_words="english", decode_error="ignore", max_features=2500)  # max_features can be changed
+vectorizer = TfidfVectorizer(stop_words="english", decode_error="ignore")  # max_features can be changed
 vectorizer.fit(X_train)
 
 tfidf_matrix = vectorizer.transform(X_train)
@@ -30,34 +30,133 @@ feature_names = vectorizer.get_feature_names_out()
 
 print(tfidf_matrix.shape)
 
-
 # Step 6
-multiBayes1 = MultinomialNB()
-multiBayes1.fit(vectorizer.transform(X_train), y_train)
-y_predict = multiBayes1.predict(vectorizer.transform(X_test))
+multiBayes = MultinomialNB()
+multiBayes.fit(vectorizer.transform(X_train), y_train)
+y_predict = multiBayes.predict(vectorizer.transform(X_test))
 
-# for i)
+# for i) and j)
 zeroFreq = [0, 0, 0, 0, 0]
 oneFreq = 0
 for category in range(0, len(files.target_names)):
-    feature = multiBayes1.feature_count_[category]
+    feature = multiBayes.feature_count_[category]
     for count in feature:
         if count == 0:
             zeroFreq[category] += 1
         if count == 1:
             oneFreq += 1
 
+# for k)
+my_words = ['Christmas', 'tree']
+my_word_matrix = vectorizer.transform(my_words)
+
 # Step 7
-print("\n********** MultinomialNB default values, try 1 **********")
-print("b) Confusion Matrix: \n", confusion_matrix(y_test, y_predict))
-print("\nc) Classification Report: \n", classification_report(y_test, y_predict, target_names=labels_str))
-print("d) Accuracy:", accuracy_score(y_test, y_predict))
-print("   Macro F1:", f1_score(y_test, y_predict, average='macro'))
-print("   Weighted F1:", f1_score(y_test, y_predict, average='weighted'))
-print("e) Prior probabilities:", multiBayes1.class_log_prior_)  # not sure
-print("f) Vocabulary Size:", len(vectorizer.vocabulary_))
-print("g) Number of word-tokens in each class:", multiBayes1.class_count_)
-print("h) Number of word-tokens in entire corpus:", tfidf_matrix.sum())
-print("i) Number and percentage of words with zero frequency in each class:", zeroFreq)
-print("j) Number and percentage of word with one frequency in entire corpus:", oneFreq)
-print("k) ", multiBayes1.predict_log_proba())  # temp number
+fh = open('bbc-performance.txt', 'w')
+fh.write("\n********** MultinomialNB default values, try 1 **********")
+fh.write("\nb) Confusion Matrix:\n" + str(confusion_matrix(y_test, y_predict)))
+fh.write("\n\nc) Classification Report: \n" + str(classification_report(y_test, y_predict, target_names=labels_str)))
+fh.write("\nd) Accuracy:" + str(accuracy_score(y_test, y_predict)))
+fh.write("\n   Macro F1:" + str(f1_score(y_test, y_predict, average='macro')))
+fh.write("\n   Weighted F1:" + str(f1_score(y_test, y_predict, average='weighted')))
+fh.write("\ne) Prior probabilities:" + str(multiBayes.class_log_prior_))  # not sure
+fh.write("\nf) Vocabulary Size:" + str(len(vectorizer.vocabulary_)))
+fh.write("\ng) Number of word-tokens in each class:" + str(multiBayes.class_count_))
+fh.write("\nh) Number of word-tokens in entire corpus:" + str(tfidf_matrix.sum()))
+fh.write("\ni) Number and percentage of words with zero frequency in each class:" + str(zeroFreq))
+fh.write("\nj) Number and percentage of word with one frequency in entire corpus:" + str(oneFreq))
+fh.write("\nk) Favorite words: Christmas and tree - " + str(multiBayes.predict_log_proba(my_word_matrix)))
+
+
+# Step 8
+multiBayes = MultinomialNB()
+multiBayes.fit(vectorizer.transform(X_train), y_train)
+y_predict = multiBayes.predict(vectorizer.transform(X_test))
+
+# for i) and j)
+zeroFreq = [0, 0, 0, 0, 0]
+oneFreq = 0
+for category in range(0, len(files.target_names)):
+    feature = multiBayes.feature_count_[category]
+    for count in feature:
+        if count == 0:
+            zeroFreq[category] += 1
+        if count == 1:
+            oneFreq += 1
+
+fh.write("\n\n********** MultinomialNB default values, try 2 **********")
+fh.write("\nb) Confusion Matrix:\n" + str(confusion_matrix(y_test, y_predict)))
+fh.write("\n\nc) Classification Report: \n" + str(classification_report(y_test, y_predict, target_names=labels_str)))
+fh.write("\nd) Accuracy:" + str(accuracy_score(y_test, y_predict)))
+fh.write("\n   Macro F1:" + str(f1_score(y_test, y_predict, average='macro')))
+fh.write("\n   Weighted F1:" + str(f1_score(y_test, y_predict, average='weighted')))
+fh.write("\ne) Prior probabilities:" + str(multiBayes.class_log_prior_))  # not sure
+fh.write("\nf) Vocabulary Size:" + str(len(vectorizer.vocabulary_)))
+fh.write("\ng) Number of word-tokens in each class:" + str(multiBayes.class_count_))
+fh.write("\nh) Number of word-tokens in entire corpus:" + str(tfidf_matrix.sum()))
+fh.write("\ni) Number and percentage of words with zero frequency in each class:" + str(zeroFreq))
+fh.write("\nj) Number and percentage of word with one frequency in entire corpus:" + str(oneFreq))
+fh.write("\nk) Favorite words: Christmas and tree - " + str(multiBayes.predict_log_proba(my_word_matrix)))
+
+
+# Step 9
+multiBayes = MultinomialNB(alpha=0.0001)
+multiBayes.fit(vectorizer.transform(X_train), y_train)
+y_predict = multiBayes.predict(vectorizer.transform(X_test))
+
+# for i) and j)
+zeroFreq = [0, 0, 0, 0, 0]
+oneFreq = 0
+for category in range(0, len(files.target_names)):
+    feature = multiBayes.feature_count_[category]
+    for count in feature:
+        if count == 0:
+            zeroFreq[category] += 1
+        if count == 1:
+            oneFreq += 1
+
+fh.write("\n\n********** MultinomialNB smoothing 0.0001 **********")
+fh.write("\nb) Confusion Matrix:\n" + str(confusion_matrix(y_test, y_predict)))
+fh.write("\n\nc) Classification Report: \n" + str(classification_report(y_test, y_predict, target_names=labels_str)))
+fh.write("\nd) Accuracy:" + str(accuracy_score(y_test, y_predict)))
+fh.write("\n   Macro F1:" + str(f1_score(y_test, y_predict, average='macro')))
+fh.write("\n   Weighted F1:" + str(f1_score(y_test, y_predict, average='weighted')))
+fh.write("\ne) Prior probabilities:" + str(multiBayes.class_log_prior_))  # not sure
+fh.write("\nf) Vocabulary Size:" + str(len(vectorizer.vocabulary_)))
+fh.write("\ng) Number of word-tokens in each class:" + str(multiBayes.class_count_))
+fh.write("\nh) Number of word-tokens in entire corpus:" + str(tfidf_matrix.sum()))
+fh.write("\ni) Number and percentage of words with zero frequency in each class:" + str(zeroFreq))
+fh.write("\nj) Number and percentage of word with one frequency in entire corpus:" + str(oneFreq))
+fh.write("\nk) Favorite words: Christmas and tree - " + str(multiBayes.predict_log_proba(my_word_matrix)))
+
+
+# Step 10
+multiBayes = MultinomialNB(alpha=0.9)
+multiBayes.fit(vectorizer.transform(X_train), y_train)
+y_predict = multiBayes.predict(vectorizer.transform(X_test))
+
+# for i) and j)
+zeroFreq = [0, 0, 0, 0, 0]
+oneFreq = 0
+for category in range(0, len(files.target_names)):
+    feature = multiBayes.feature_count_[category]
+    for count in feature:
+        if count == 0:
+            zeroFreq[category] += 1
+        if count == 1:
+            oneFreq += 1
+
+fh.write("\n\n********** MultinomialNB smoothing 0.9 **********")
+fh.write("\nb) Confusion Matrix:\n" + str(confusion_matrix(y_test, y_predict)))
+fh.write("\n\nc) Classification Report: \n" + str(classification_report(y_test, y_predict, target_names=labels_str)))
+fh.write("\nd) Accuracy:" + str(accuracy_score(y_test, y_predict)))
+fh.write("\n   Macro F1:" + str(f1_score(y_test, y_predict, average='macro')))
+fh.write("\n   Weighted F1:" + str(f1_score(y_test, y_predict, average='weighted')))
+fh.write("\ne) Prior probabilities:" + str(multiBayes.class_log_prior_))  # not sure
+fh.write("\nf) Vocabulary Size:" + str(len(vectorizer.vocabulary_)))
+fh.write("\ng) Number of word-tokens in each class:" + str(multiBayes.class_count_))
+fh.write("\nh) Number of word-tokens in entire corpus:" + str(tfidf_matrix.sum()))
+fh.write("\ni) Number and percentage of words with zero frequency in each class:" + str(zeroFreq))
+fh.write("\nj) Number and percentage of word with one frequency in entire corpus:" + str(oneFreq))
+fh.write("\nk) Favorite words: Christmas and tree - " + str(multiBayes.predict_log_proba(my_word_matrix)))
+
+fh.close()
