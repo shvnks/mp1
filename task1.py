@@ -66,7 +66,7 @@ multiBayes.fit(vectorizer.transform(X_train), y_train)
 y_predict = multiBayes.predict(vectorizer.transform(X_test))
 
 # for g), i) and j)
-word_per_class = {}
+word_per_class = [0, 0, 0, 0, 0]
 zeroFreq = [0, 0, 0, 0, 0]
 word_per_class = [0, 0, 0, 0, 0]
 oneFreq = 0
