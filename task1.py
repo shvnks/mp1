@@ -14,19 +14,19 @@ import os
 
 # Step 2
 # 510 files
-businessList = os.listdir('mp1/BBC/business')
+businessList = os.listdir('BBC/business')
 business = len(businessList)
 # 386 files
-entertainmentList = os.listdir('mp1/BBC/entertainment')
+entertainmentList = os.listdir('BBC/entertainment')
 entertainment = len(entertainmentList)
 # 417 files
-politicList = os.listdir('mp1/BBC/politics')
+politicList = os.listdir('BBC/politics')
 politics = len(politicList)
 # 511 files
-sportList = os.listdir('mp1/BBC/sport')
+sportList = os.listdir('BBC/sport')
 sport = len(sportList)
 # 401 files
-techList = os.listdir('mp1/BBC/tech')
+techList = os.listdir('BBC/tech')
 tech = len(techList)
 
 # plotting chart
@@ -42,7 +42,7 @@ plt.savefig("output/task1/bbc-distribution.pdf", bbox_inches="tight")
 
 
 # Step 3
-files = load_files('mp1/BBC', encoding='latin1')
+files = load_files('BBC', encoding='latin1')
 
 # Step 4
 labels, counts = np.unique(files.target, return_counts=True)
@@ -82,7 +82,7 @@ my_words = ['Christmas', 'tree']
 my_word_matrix = vectorizer.transform(my_words)
 
 # Step 7
-fh = open('bbc-performance.txt', 'w')
+fh = open('output/task1/bbc-performance.txt', 'w')
 fh.write("\n********** MultinomialNB default values, try 1 **********")
 fh.write("\nb) Confusion Matrix:\n" + str(confusion_matrix(y_test, y_predict)))
 fh.write("\n\nc) Classification Report: \n" + str(classification_report(y_test, y_predict, target_names=labels_str)))

@@ -1,0 +1,132 @@
+
+********** MultinomialNB default values, try 1 **********
+b) Confusion Matrix:
+[[105   0   1   0   0]
+ [  3  68   4   0   2]
+ [  0   0  63   0   0]
+ [  0   0   0 101   0]
+ [  4   0   2   1  91]]
+
+c) Classification Report: 
+               precision    recall  f1-score   support
+
+     business       0.94      0.99      0.96       106
+entertainment       1.00      0.88      0.94        77
+     politics       0.90      1.00      0.95        63
+        sport       0.99      1.00      1.00       101
+         tech       0.98      0.93      0.95        98
+
+     accuracy                           0.96       445
+    macro avg       0.96      0.96      0.96       445
+ weighted avg       0.96      0.96      0.96       445
+
+d) Accuracy:0.9617977528089887
+   Macro F1:0.9593111361212833
+   Weighted F1:0.9615722560262341
+e) Prior probabilities:[-1.48295377 -1.75102737 -1.61507173 -1.46821148 -1.77063584]
+f) Vocabulary Size:26333
+g) Number of word-tokens in each class:[404. 309. 354. 410. 303.]
+h) Number of word-tokens in entire corpus:16351.107701251298
+i) Number and percentage of words with zero frequency in each class:[15976, 16179, 16314, 16933, 16024]
+j) Number and percentage of word with one frequency in entire corpus:0
+k) Favorite words: Christmas and tree - [[-1.17889531 -1.27083049 -2.08478459 -2.15240353 -1.76466167]
+ [-1.5840969  -1.47954379 -1.71440016 -1.57051828 -1.71971948]]
+
+********** MultinomialNB default values, try 2 **********
+b) Confusion Matrix:
+[[105   0   1   0   0]
+ [  3  68   4   0   2]
+ [  0   0  63   0   0]
+ [  0   0   0 101   0]
+ [  4   0   2   1  91]]
+
+c) Classification Report: 
+               precision    recall  f1-score   support
+
+     business       0.94      0.99      0.96       106
+entertainment       1.00      0.88      0.94        77
+     politics       0.90      1.00      0.95        63
+        sport       0.99      1.00      1.00       101
+         tech       0.98      0.93      0.95        98
+
+     accuracy                           0.96       445
+    macro avg       0.96      0.96      0.96       445
+ weighted avg       0.96      0.96      0.96       445
+
+d) Accuracy:0.9617977528089887
+   Macro F1:0.9593111361212833
+   Weighted F1:0.9615722560262341
+e) Prior probabilities:[-1.48295377 -1.75102737 -1.61507173 -1.46821148 -1.77063584]
+f) Vocabulary Size:26333
+g) Number of word-tokens in each class:[404. 309. 354. 410. 303.]
+h) Number of word-tokens in entire corpus:16351.107701251298
+i) Number and percentage of words with zero frequency in each class:[15976, 16179, 16314, 16933, 16024]
+j) Number and percentage of word with one frequency in entire corpus:0
+k) Favorite words: Christmas and tree - [[-1.17889531 -1.27083049 -2.08478459 -2.15240353 -1.76466167]
+ [-1.5840969  -1.47954379 -1.71440016 -1.57051828 -1.71971948]]
+
+********** MultinomialNB smoothing 0.0001 **********
+b) Confusion Matrix:
+[[101   1   4   0   0]
+ [  1  72   2   0   2]
+ [  0   1  62   0   0]
+ [  0   0   1 100   0]
+ [  2   0   1   0  95]]
+
+c) Classification Report: 
+               precision    recall  f1-score   support
+
+     business       0.97      0.95      0.96       106
+entertainment       0.97      0.94      0.95        77
+     politics       0.89      0.98      0.93        63
+        sport       1.00      0.99      1.00       101
+         tech       0.98      0.97      0.97        98
+
+     accuracy                           0.97       445
+    macro avg       0.96      0.97      0.96       445
+ weighted avg       0.97      0.97      0.97       445
+
+d) Accuracy:0.9662921348314607
+   Macro F1:0.9634523646118514
+   Weighted F1:0.9665480952097019
+e) Prior probabilities:[-1.48295377 -1.75102737 -1.61507173 -1.46821148 -1.77063584]
+f) Vocabulary Size:26333
+g) Number of word-tokens in each class:[404. 309. 354. 410. 303.]
+h) Number of word-tokens in entire corpus:16351.107701251298
+i) Number and percentage of words with zero frequency in each class:[15976, 16179, 16314, 16933, 16024]
+j) Number and percentage of word with one frequency in entire corpus:0
+k) Favorite words: Christmas and tree - [[-1.0867452  -0.9095279  -2.8259473  -3.78738246 -1.72560225]
+ [-8.57014779 -0.27598008 -8.68680008 -8.56521294 -1.42452451]]
+
+********** MultinomialNB smoothing 0.9 **********
+b) Confusion Matrix:
+[[105   0   1   0   0]
+ [  3  69   3   0   2]
+ [  0   0  63   0   0]
+ [  0   0   0 101   0]
+ [  4   0   2   1  91]]
+
+c) Classification Report: 
+               precision    recall  f1-score   support
+
+     business       0.94      0.99      0.96       106
+entertainment       1.00      0.90      0.95        77
+     politics       0.91      1.00      0.95        63
+        sport       0.99      1.00      1.00       101
+         tech       0.98      0.93      0.95        98
+
+     accuracy                           0.96       445
+    macro avg       0.96      0.96      0.96       445
+ weighted avg       0.97      0.96      0.96       445
+
+d) Accuracy:0.9640449438202248
+   Macro F1:0.9622014318137071
+   Weighted F1:0.9638470546165344
+e) Prior probabilities:[-1.48295377 -1.75102737 -1.61507173 -1.46821148 -1.77063584]
+f) Vocabulary Size:26333
+g) Number of word-tokens in each class:[404. 309. 354. 410. 303.]
+h) Number of word-tokens in entire corpus:16351.107701251298
+i) Number and percentage of words with zero frequency in each class:[15976, 16179, 16314, 16933, 16024]
+j) Number and percentage of word with one frequency in entire corpus:0
+k) Favorite words: Christmas and tree - [[-1.16742524 -1.25221697 -2.11365996 -2.19978352 -1.76410314]
+ [-1.59486726 -1.45577381 -1.72499483 -1.58140114 -1.71488712]]

@@ -1,0 +1,12 @@
+####################################
+######    Task1 Discussion    ######
+####################################
+In a separate plain textle called bbc-discussion.txt, explain in 1 to 2 paragraphs:
+(a) what metric is best suited to this dataset/task and why (see step (2))
+
+Both the business and sport classes are best suited for this dataset for one main reason: they both contain the largest amount of documents within their classes. As such they provide us with more data to analyze such that we can achieve the most accurate results possible.
+
+(b) why the performance of steps (8-10) are the same or are different than those of step (7) above.
+With step 8 (no smoothing), we see that the accuracy, macro (F1), and weighted values are all identical. Whereas with step 9 and 10 (with smoothing values of 0.0001 and 0.9) we see that there is a difference in accuracy value of 0.22471910112359. We also notice that there is a difference in macro F1 and weighted values.
+
+These differences can be explained by the various smoothing values that were applied when using MultinomialNB. When applying a larger smoothing value, we notice that our accuracy scores drop by a small factor. Thus we can infer that the larger the smoothing value, the lower the accuracy because this larger value would have a greater impact on removing inconsistencies. However it may cause some harm to the raw data by impacting the accuracy scores.

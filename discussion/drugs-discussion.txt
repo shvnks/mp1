@@ -1,0 +1,8 @@
+####################################
+######    Task2 Discussion    ######
+####################################
+Does the same model give you the same performance every time? Explain in a plain textle called drugs-discussion.txt. A 1 or 2 paragraph discussion is expected.
+
+Out of all of the models, the Multi-Layered Perceptron with GridSearchCV was the only model that gave different performance. This is due to the X and y training and testing data that we gave. Since we did not change these values for each run, the models would return the same result each performance.
+
+The only model that gave a different performance was the MLP with GridSearchCV, since it was using stochastic models that are given as parameters. Stochastic models return different results with the same input by forecasting probabilities of various outcomes under different conditions. 
