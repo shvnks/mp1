@@ -68,7 +68,6 @@ y_predict = multiBayes.predict(vectorizer.transform(X_test))
 # for g), i) and j)
 word_per_class = [0, 0, 0, 0, 0]
 zeroFreq = [0, 0, 0, 0, 0]
-word_per_class = [0, 0, 0, 0, 0]
 oneFreq = 0
 for category in range(0, len(files.target_names)):
     feature = multiBayes.feature_count_[category]
@@ -106,9 +105,8 @@ multiBayes = MultinomialNB()
 multiBayes.fit(vectorizer.transform(X_train), y_train)
 y_predict = multiBayes.predict(vectorizer.transform(X_test))
 
-word_per_class = {}
-zeroFreq = [0, 0, 0, 0, 0]
 word_per_class = [0, 0, 0, 0, 0]
+zeroFreq = [0, 0, 0, 0, 0]
 oneFreq = 0
 for category in range(0, len(files.target_names)):
     feature = multiBayes.feature_count_[category]
@@ -140,9 +138,8 @@ multiBayes = MultinomialNB(alpha=0.0001)
 multiBayes.fit(vectorizer.transform(X_train), y_train)
 y_predict = multiBayes.predict(vectorizer.transform(X_test))
 
-word_per_class = {}
-zeroFreq = [0, 0, 0, 0, 0]
 word_per_class = [0, 0, 0, 0, 0]
+zeroFreq = [0, 0, 0, 0, 0]
 oneFreq = 0
 for category in range(0, len(files.target_names)):
     feature = multiBayes.feature_count_[category]
@@ -174,9 +171,8 @@ multiBayes = MultinomialNB(alpha=0.9)
 multiBayes.fit(vectorizer.transform(X_train), y_train)
 y_predict = multiBayes.predict(vectorizer.transform(X_test))
 
-word_per_class = {}
-zeroFreq = [0, 0, 0, 0, 0]
 word_per_class = [0, 0, 0, 0, 0]
+zeroFreq = [0, 0, 0, 0, 0]
 oneFreq = 0
 for category in range(0, len(files.target_names)):
     feature = multiBayes.feature_count_[category]
